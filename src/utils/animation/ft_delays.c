@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_delays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 00:28:02 by vorace32          #+#    #+#             */
-/*   Updated: 2024/10/30 01:43:39 by vorace32         ###   ########.fr       */
+/*   Created: 2024/10/30 02:15:16 by vorace32          #+#    #+#             */
+/*   Updated: 2024/10/30 02:25:34 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/Minishell_exec.h"
+#include "../../Minishell_exec.h"
 
-int	main(int argc, char **argv, char **env)
+void	ft_delay(int milliseconds)
 {
-	t_shell	shell;
+	volatile long long	count;
+	long long			limit;
 
-	(void)argc;
-	(void)argv;
-	init_shell(&shell, env);
-	main_loop(&shell);
-	printf("Hello, World!\n");
-	return (0);
+	count = 0;
+	limit = milliseconds * 30000;
+	while (count < limit)
+		count++;
+}
+
+void	delay_write(const char *prompt)
+{
+	while (*prompt)
+	{
+		write(1, prompt, 1);
+		ft_delay(1000);
+		prompt++;
+	}
 }

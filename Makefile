@@ -43,7 +43,11 @@ READLINE_FLAGS = -lreadline
 
 # Sources
 SRC_DIR = src
-SRC = main.c 
+SRC = main.c \
+      $(SRC_DIR)/init/init_shell.c \
+      $(SRC_DIR)/setup/main_loop.c \
+	  $(SRC_DIR)/utils/animation/draw_logo.c  $(SRC_DIR)/utils/animation/ft_delays.c 
+     
 
 OBJ = $(SRC:.c=.o)
 
@@ -91,18 +95,18 @@ re: fclean all
 banner:
 	@clear
 	@echo "$(BBLUE)"
-	@echo "╔═════════════════════════════════════════════════════════════╗"
-	@echo "║                                                             ║"
-	@echo "║  $(BYELLOW)███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗$(BBLUE)   ║"
-	@echo "║  $(BYELLOW)████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║$(BBLUE)   ║"
-	@echo "║  $(BYELLOW)██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║$(BBLUE)   ║"
-	@echo "║  $(BYELLOW)██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║$(BBLUE)   ║"
-	@echo "║  $(BYELLOW)██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗$(BBLUE)║"
-	@echo "║  $(BYELLOW)╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝$(BBLUE)║"
-	@echo "║                                                             ║"
-	@echo "║                    $(BWHITE)Created by: vorace32 $(BBLUE)                    ║"
-	@echo "║                     $(SPARKLES) $(BWHITE)Version: 1.0 $(SPARKLES)$(BBLUE)                      ║"
-	@echo "╚═════════════════════════════════════════════════════════════╝"
+	@echo "╔══════════════════════════════════════════════════════════════╗"
+	@echo "║                                                              ║"
+	@echo "║  $(BYELLOW)███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗$(BBLUE)      ║"
+	@echo "║  $(BYELLOW)████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║$(BBLUE)      ║"
+	@echo "║  $(BYELLOW)██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║$(BBLUE)      ║"
+	@echo "║  $(BYELLOW)██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║$(BBLUE)      ║"
+	@echo "║  $(BYELLOW)██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗$(BBLUE) ║"
+	@echo "║  $(BYELLOW)╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝$(BBLUE) ║"
+	@echo "║                                                              ║"
+	@echo "║                    $(BWHITE)Created by: vorace32 $(BBLUE)                     ║"
+	@echo "║                     $(SPARKLES) $(BWHITE)Version: 1.0 $(SPARKLES)$(BBLUE)                       ║"
+	@echo "╚══════════════════════════════════════════════════════════════╝"
 	@echo "$(RESET)\n"
 
 .PHONY: all clean fclean re banner
