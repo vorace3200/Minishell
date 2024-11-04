@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:32:28 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/11/04 15:41:33 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ typedef struct s_token
 typedef struct s_command
 {
 	char				**args;
-	int args_size;  // Taille allouée pour args
-	int args_count; // Nombre actuel d'arguments
+	int					args_size;
+	int					args_count;
 	char				*cmd_path;
 	int					pipe_in;
 	int					pipe_out;
-	int pipe_in_fd;  // Descripteur du pipe d'entrée
-	int pipe_out_fd; // Descripteur du pipe de sortie
+	int					pipe_in_fd;
+	int					pipe_out_fd;
 	int					redir_in;
 	int					redir_out;
 	struct s_command	*next;
