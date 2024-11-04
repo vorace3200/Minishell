@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 00:28:02 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:34:01 by vorace32         ###   ########.fr       */
+/*   Created: 2024/10/31 14:01:26 by vorace32          #+#    #+#             */
+/*   Updated: 2024/11/04 15:18:39 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/Minishell_exec.h"
+#include "../../Minishell_exec.h"
 
-int	main(int argc, char **argv, char **env)
+int	handle_pipe(const char *input, int *i, t_token **tokens, t_token **tail)
 {
-	t_shell	shell;
-
-	(void)argc;
-	(void)argv;
-	init_shell(&shell, env);
-	main_loop(&shell);
+	if (input[*i] == '|')
+	{
+		add_token(tokens, tail, create_token(ft_strdup("|"), TOKEN_PIPE));
+		(*i)++;
+		return (1);
+	}
 	return (0);
 }

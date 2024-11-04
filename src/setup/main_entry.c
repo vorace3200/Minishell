@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_entry.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 00:28:02 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:34:01 by vorace32         ###   ########.fr       */
+/*   Created: 2024/10/30 14:53:50 by vorace32          #+#    #+#             */
+/*   Updated: 2024/11/04 15:17:35 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/Minishell_exec.h"
+#include "../Minishell_exec.h"
 
-int	main(int argc, char **argv, char **env)
+void	main_entry(t_shell *shell)
 {
-	t_shell	shell;
-
-	(void)argc;
-	(void)argv;
-	init_shell(&shell, env);
-	main_loop(&shell);
-	return (0);
+	main_parsing(shell);
+	execute_commands(shell);
+	free_commands(shell->cmd_list);
+	shell->cmd_list = NULL;
 }

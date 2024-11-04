@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/10/30 02:26:08 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/11/04 15:32:28 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
@@ -39,18 +40,40 @@
 # define WHITE "\033[37m"
 # define BOLD "\033[1m"
 
+typedef enum e_token_type
+{
+	TOKEN_WORD,
+	TOKEN_PIPE,
+	TOKEN_REDIR_IN,
+	TOKEN_REDIR_OUT,
+	TOKEN_D_REDIR_IN,
+	TOKEN_D_REDIR_OUT,
+	TOKEN_EOF
+}						t_token_type;
+
+typedef struct s_token
+{
+	char				*value;
+	t_token_type		type;
+	struct s_token		*next;
+	struct s_token		*prev;
+}						t_token;
+
 typedef struct s_command
 {
 	char				**args;
+	int args_size;  // Taille allouée pour args
+	int args_count; // Nombre actuel d'arguments
 	char				*cmd_path;
 	int					pipe_in;
 	int					pipe_out;
+	int pipe_in_fd;  // Descripteur du pipe d'entrée
+	int pipe_out_fd; // Descripteur du pipe de sortie
 	int					redir_in;
 	int					redir_out;
 	struct s_command	*next;
 	struct s_command	*prev;
 }						t_command;
-
 typedef struct s_shell
 {
 	char				**env;
@@ -60,9 +83,58 @@ typedef struct s_shell
 	int					is_running;
 }						t_shell;
 
+// ==================== [ Execution ] ==================== //
+void					execute_commands(t_shell *shell);
+
+// ==================== [ Command ] ==================== //
+void					add_redirection_to_command(t_command *cmd,
+							t_token_type type, char *filename);
+void					add_argument_to_command(t_command *cmd, char *arg);
+// ==================== [ Free ] ==================== //
+void					free_tokens(t_token *tokens);
+void					free_commands(t_command *cmd_list);
+// ==================== [ Lexer ] ==================== //
+t_token					*lexer(const char *input);
+void					handle_word(const char *input, int *i, t_token **tokens,
+							t_token **tail);
+int						handle_quotes(char **input, int *i, t_token **tokens,
+							t_token **tail);
+int						handle_redirection(const char *input, int *i,
+							t_token **tokens, t_token **tail);
+int						handle_pipe(const char *input, int *i, t_token **tokens,
+							t_token **tail);
+
+// ==================== [ Token ] ==================== //
+t_token					*create_token(char *value, t_token_type type);
+void					add_token(t_token **head, t_token **tail,
+							t_token *new_token);
+// ==================== [ Parsing ] ==================== //
+void					main_parsing(t_shell *shell);
+void					handle_command_list(t_token *tokens, t_shell *shell);
+
+// ==================== [ Node ] ==================== //
+t_command				*new_command_node(void);
+
+// ==================== [ Utils ] ==================== //
+void					delay_write(const char *prompt);
+void					draw_logo(void);
+char					**ft_split(char *str, char delimiter);
+void					ft_free_split(char **split);
+char					*ft_strncpy(char *dest, const char *src, size_t n);
+char					*ft_strdup(const char *s);
+char					*ft_strndup(const char *s, size_t n);
+int						ft_isspace(int c);
+void					ft_putstr_fd(char *s, int fd);
+int						ft_strlen(const char *c);
+char					*ft_strjoin_free(char *s1, char *s2);
+char					*ft_strjoin(char const *s1, char const *s2);
+void					*ft_memcpy(void *dest, const void *src, size_t n);
+// ==================== [ Handle ] ==================== //
+void					handle_command(t_shell *shell);
+
+// ==================== [ Setup ] ==================== //
 void					init_shell(t_shell *shell, char **env);
 void					main_loop(t_shell *shell);
-void					draw_logo(void);
-void					delay_write(const char *prompt);
+void					main_entry(t_shell *shell);
 
 #endif

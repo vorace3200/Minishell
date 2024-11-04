@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   create_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 00:28:02 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:34:01 by vorace32         ###   ########.fr       */
+/*   Created: 2024/10/30 21:24:05 by vorace32          #+#    #+#             */
+/*   Updated: 2024/10/30 21:27:43 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/Minishell_exec.h"
+#include "../../../Minishell_exec.h"
 
-int	main(int argc, char **argv, char **env)
+t_token	*create_token(char *value, t_token_type type)
 {
-	t_shell	shell;
+	t_token	*token;
 
-	(void)argc;
-	(void)argv;
-	init_shell(&shell, env);
-	main_loop(&shell);
-	return (0);
+	token = malloc(sizeof(t_token));
+	if (!token)
+		return (NULL);
+	token->value = value;
+	token->type = type;
+	token->next = NULL;
+	return (token);
 }

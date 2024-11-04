@@ -45,8 +45,17 @@ READLINE_FLAGS = -lreadline
 SRC_DIR = src
 SRC = main.c \
       $(SRC_DIR)/init/init_shell.c \
-      $(SRC_DIR)/setup/main_loop.c \
-	  $(SRC_DIR)/utils/animation/draw_logo.c  $(SRC_DIR)/utils/animation/ft_delays.c 
+      $(SRC_DIR)/setup/main_loop.c $(SRC_DIR)/setup/main_entry.c  \
+	  $(SRC_DIR)/parsing/main_parsing.c \
+	  $(SRC_DIR)/parsing/lexer/handle_lexer.c $(SRC_DIR)/parsing/lexer/handle_quotes.c $(SRC_DIR)/parsing/lexer/handle_word.c $(SRC_DIR)/parsing/lexer/handle_pipe.c $(SRC_DIR)/parsing/lexer/handle_redirect.c\
+	  $(SRC_DIR)/parsing/command/handle_command.c $(SRC_DIR)/parsing/command/global_free.c $(SRC_DIR)/parsing/command/redirect_command.c\
+	  $(SRC_DIR)/parsing/command/node/new_node.c \
+	  $(SRC_DIR)/parsing/command/token/create_token.c $(SRC_DIR)/parsing/command/token/add_tokens.c \
+	  $(SRC_DIR)/parsing/command/variables/expand_env.c $(SRC_DIR)/parsing/command/variables/expand_variables.c  \
+	  $(SRC_DIR)/utils/animation/draw_logo.c $(SRC_DIR)/utils/animation/ft_delays.c \
+	  $(SRC_DIR)/utils/fonctions/ft_split.c  $(SRC_DIR)/utils/fonctions/ft_isspace.c  $(SRC_DIR)/utils/fonctions/ft_strndup.c   $(SRC_DIR)/utils/fonctions/ft_strncpy.c $(SRC_DIR)/utils/fonctions/ft_strdup.c  $(SRC_DIR)/utils/fonctions/ft_putstr_fd.c \
+	  $(SRC_DIR)/utils/fonctions/ft_strlen.c $(SRC_DIR)/utils/fonctions/ft_strjoin.c $(SRC_DIR)/utils/fonctions/ft_memcpy.c  \
+	  $(SRC_DIR)/execution/test.c 
      
 
 OBJ = $(SRC:.c=.o)
