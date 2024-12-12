@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_parsing.c                                     :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 15:04:07 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/11 16:00:34 by vorace32         ###   ########.fr       */
+/*   Created: 2024/12/11 16:39:38 by vorace32          #+#    #+#             */
+/*   Updated: 2024/12/12 10:30:48 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Minishell_exec.h"
+#include "../../Minishell_exec.h"
 
-void	main_parsing(t_shell *shell)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_token	*tokens;
-
-	if (!shell->input || *(shell->input) == '\0')
-		return ;
-	tokens = lexer(shell->input);
-	if (!tokens)
+	while (*s1 && *s2 && *s1 == *s2)
 	{
-		shell->exit_status = MALLOC_ERROR;
-		return ;
+		s1++;
+		s2++;
 	}
-	handle_command_list(tokens, shell);
-	free_tokens(tokens);
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
