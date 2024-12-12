@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/11 16:42:12 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/12 19:28:51 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int						is_builtin(char **args);
 int						execute_builtin(t_shell *shell, char **args);
 void					builtin_echo(char **args);
 void					builtin_exit(t_shell *shell, char **args);
+void					builtin_pwd(t_shell *shell);
 // ==================== [ Command ] ==================== //
 void					add_redirection_to_command(t_command *cmd,
 							t_token_type type, char *filename);
