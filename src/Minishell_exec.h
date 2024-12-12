@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 19:28:51 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/12 23:10:25 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,22 @@ typedef struct s_shell
 // ==================== [ Execution ] ==================== //
 void					execute_commands(t_shell *shell);
 void					execute_command(t_command *cmd, t_shell *shell);
+void					redirect_fds(t_command *cmd);
+
 // ==================== [ Builtins ] ==================== //
 int						is_builtin(char **args);
 int						execute_builtin(t_shell *shell, char **args);
 void					builtin_echo(char **args);
 void					builtin_exit(t_shell *shell, char **args);
 void					builtin_pwd(t_shell *shell);
+void					builtin_cd(t_shell *shell, char **args);
+// ==================== [ Environement ] ==================== //
+char					*get_env_value(t_shell *shell, char *env_name);
+int						set_env_value(t_shell *shell, const char *env_name,
+							const char *value);
+int						unset_env_value(t_shell *shell, const char *env_name);
+int						env_count(char **env);
+
 // ==================== [ Command ] ==================== //
 void					add_redirection_to_command(t_command *cmd,
 							t_token_type type, char *filename);
@@ -136,6 +146,7 @@ char					*ft_strjoin_free(char *s1, char *s2);
 char					*ft_strjoin(char const *s1, char const *s2);
 void					*ft_memcpy(void *dest, const void *src, size_t n);
 int						ft_strcmp(const char *s1, const char *s2);
+int						ft_strncmp(const char *s1, const char *s2, size_t n);
 // ==================== [ Handle ] ==================== //
 void					handle_command(t_shell *shell);
 

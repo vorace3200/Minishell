@@ -1,15 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_env.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 15:37:40 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:37:46 by vorace32         ###   ########.fr       */
+/*   Created: 2024/12/12 22:39:57 by vorace32          #+#    #+#             */
+/*   Updated: 2024/12/12 22:40:10 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../Minishell_exec.h"
+#include "../../Minishell_exec.h"
 
-// TODO: Faire cette fonction (javais la flemme)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	while (n && *s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+		n--;
+	}
+	if (n == 0)
+		return (0);
+	return ((unsigned char)*s1 - (unsigned char)*s2);
+}

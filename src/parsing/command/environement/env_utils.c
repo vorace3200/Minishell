@@ -1,15 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_variables.c                                 :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 21:29:21 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:37:33 by vorace32         ###   ########.fr       */
+/*   Created: 2024/12/12 22:32:30 by vorace32          #+#    #+#             */
+/*   Updated: 2024/12/12 23:15:49 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../Minishell_exec.h"
 
-// TODO: Faire cette fonction (javais la flemme)
+int	env_count(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env && env[i])
+		i++;
+	return (i);
+}

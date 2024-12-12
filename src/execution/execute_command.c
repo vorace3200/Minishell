@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 16:28:28 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/11 23:22:48 by vorace32         ###   ########.fr       */
+/*   Created: 2024/12/12 23:05:49 by vorace32          #+#    #+#             */
+/*   Updated: 2024/12/12 23:10:41 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Minishell_exec.h"
 
-static void	redirect_fds(t_command *cmd)
+void	redirect_fds(t_command *cmd)
 {
 	if (cmd->redir_in != -1)
 	{

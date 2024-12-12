@@ -51,12 +51,12 @@ SRC = main.c \
 	  $(SRC_DIR)/parsing/command/handle_command.c $(SRC_DIR)/parsing/command/global_free.c $(SRC_DIR)/parsing/command/redirect_command.c\
 	  $(SRC_DIR)/parsing/command/node/new_node.c \
 	  $(SRC_DIR)/parsing/command/token/create_token.c $(SRC_DIR)/parsing/command/token/add_tokens.c \
-	  $(SRC_DIR)/parsing/command/variables/expand_env.c $(SRC_DIR)/parsing/command/variables/expand_variables.c  \
+	  $(SRC_DIR)/parsing/command/environement/get_env_value.c $(SRC_DIR)/parsing/command/environement/env_utils.c  $(SRC_DIR)/parsing/command/environement/set_env_value.c  $(SRC_DIR)/parsing/command/environement/unset_env_value.c \
 	  $(SRC_DIR)/utils/animation/draw_logo.c $(SRC_DIR)/utils/animation/ft_delays.c \
-	  $(SRC_DIR)/utils/fonctions/ft_split.c  $(SRC_DIR)/utils/fonctions/ft_isspace.c  $(SRC_DIR)/utils/fonctions/ft_strndup.c   $(SRC_DIR)/utils/fonctions/ft_strncpy.c $(SRC_DIR)/utils/fonctions/ft_strdup.c  $(SRC_DIR)/utils/fonctions/ft_putstr_fd.c $(SRC_DIR)/utils/fonctions/ft_strcmp.c \
+	  $(SRC_DIR)/utils/fonctions/ft_split.c  $(SRC_DIR)/utils/fonctions/ft_isspace.c  $(SRC_DIR)/utils/fonctions/ft_strndup.c   $(SRC_DIR)/utils/fonctions/ft_strncpy.c $(SRC_DIR)/utils/fonctions/ft_strdup.c  $(SRC_DIR)/utils/fonctions/ft_putstr_fd.c $(SRC_DIR)/utils/fonctions/ft_strcmp.c $(SRC_DIR)/utils/fonctions/ft_strncmp.c \
 	  $(SRC_DIR)/utils/fonctions/ft_strlen.c $(SRC_DIR)/utils/fonctions/ft_strjoin.c $(SRC_DIR)/utils/fonctions/ft_memcpy.c  \
 	  $(SRC_DIR)/execution/execute_command.c  $(SRC_DIR)/execution/execute_commands.c  \
-	  $(SRC_DIR)/execution/builtins/builtins.c  $(SRC_DIR)/execution/builtins/echo.c $(SRC_DIR)/execution/builtins/exit.c $(SRC_DIR)/execution/builtins/pwd.c 
+	  $(SRC_DIR)/execution/builtins/builtins.c  $(SRC_DIR)/execution/builtins/echo.c $(SRC_DIR)/execution/builtins/exit.c $(SRC_DIR)/execution/builtins/pwd.c  $(SRC_DIR)/execution/builtins/cd.c  \
      
 
 OBJ = $(SRC:.c=.o)
