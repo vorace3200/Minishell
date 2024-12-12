@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 23:10:25 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/12 23:58:44 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ void					builtin_echo(char **args);
 void					builtin_exit(t_shell *shell, char **args);
 void					builtin_pwd(t_shell *shell);
 void					builtin_cd(t_shell *shell, char **args);
+void					builtin_env(t_shell *shell);
+void					builtin_export(t_shell *shell, char **args);
+void					builtin_unset(t_shell *shell, char **args);
 // ==================== [ Environement ] ==================== //
 char					*get_env_value(t_shell *shell, char *env_name);
 int						set_env_value(t_shell *shell, const char *env_name,
@@ -147,6 +150,10 @@ char					*ft_strjoin(char const *s1, char const *s2);
 void					*ft_memcpy(void *dest, const void *src, size_t n);
 int						ft_strcmp(const char *s1, const char *s2);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
+char					*ft_strchr(const char *s, int c);
+
+int						ft_isalnum(int c);
+int						ft_isdigit(int c);
 // ==================== [ Handle ] ==================== //
 void					handle_command(t_shell *shell);
 

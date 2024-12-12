@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 21:31:47 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 23:58:19 by vorace32         ###   ########.fr       */
+/*   Created: 2024/12/12 23:31:46 by vorace32          #+#    #+#             */
+/*   Updated: 2024/12/12 23:31:54 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Minishell_exec.h"
 
-int	ft_isspace(int c)
+void	builtin_env(t_shell *shell)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
-		|| c == '\r');
+	int	i;
+
+	i = 0;
+	while (shell->env && shell->env[i])
+	{
+		ft_putstr_fd(shell->env[i], 1);
+		ft_putstr_fd("\n", 1);
+		i++;
+	}
+	shell->exit_status = 0;
 }
