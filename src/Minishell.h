@@ -6,12 +6,12 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/14 14:23:47 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:03:26 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL__H
-# define MINISHELL__H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include <readline/history.h>
 # include <readline/readline.h>

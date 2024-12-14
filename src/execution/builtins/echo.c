@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:27:04 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/14 14:22:02 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:00:21 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 char	*remove_slash(const char *str)
 {
 	char	*result;
+	int		i;
+	int		j;
 
-	int i, j;
 	result = malloc(ft_strlen(str) + 1);
 	if (!result)
 		return (NULL);
