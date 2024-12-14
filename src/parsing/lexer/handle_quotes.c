@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:51:26 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:16:10 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:17:36 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,11 @@ int	handle_quotes(char **input, int *i, t_token **tokens, t_token **tail)
 		if (read_until_closing_quote(input, i, quote) == -1)
 			return (-1);
 		value = ft_strndup(*input + start, *i - start);
-		add_token(tokens, tail, create_token(value, TOKEN_WORD));
 		(*i)++;
+		if (value && *value)
+			add_token(tokens, tail, create_token(value, TOKEN_WORD));
+		else
+			free(value);
 		return (1);
 	}
 	return (0);

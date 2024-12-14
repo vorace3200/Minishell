@@ -6,16 +6,37 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:27:04 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 10:25:09 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:10:26 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Minishell_exec.h"
 
+char	*remove_slash(const char *str)
+{
+	char	*result;
+
+	int i, j;
+	result = malloc(ft_strlen(str) + 1);
+	if (!result)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '\\' && str[i + 1] && str[i + 1] != '\\')
+			i++;
+		result[j++] = str[i++];
+	}
+	result[j] = '\0';
+	return (result);
+}
+
 void	builtin_echo(char **args)
 {
-	int	i;
-	int	newline;
+	int		i;
+	int		newline;
+	char	*str;
 
 	newline = 1;
 	i = 1;
@@ -26,7 +47,12 @@ void	builtin_echo(char **args)
 	}
 	while (args[i])
 	{
-		printf("%s", args[i]);
+		str = remove_slash(args[i]);
+		if (str)
+		{
+			printf("%s", str);
+			free(str);
+		}
 		if (args[i + 1])
 			printf(" ");
 		i++;
