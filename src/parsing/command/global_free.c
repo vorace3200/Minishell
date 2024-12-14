@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:42:35 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:37:13 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:17 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 void	free_tokens(t_token *tokens)
 {

@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:48:32 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:30:02 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:32 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../Minishell_exec.h"
+#include "../../../Minishell.h"
 
 t_command	*new_command_node(void)
 {

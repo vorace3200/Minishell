@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 19:08:52 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:38:17 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:23:06 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 void	ft_free_split(char **split)
 {

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Minishell_exec.h                                   :+:      :+:    :+:   */
+/*   Minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 23:58:44 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:23:47 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_EXEC_H
-# define MINISHELL_EXEC_H
+#ifndef MINISHELL__H
+# define MINISHELL__H
 
 # include <readline/history.h>
 # include <readline/readline.h>

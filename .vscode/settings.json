@@ -1,6 +1,6 @@
 {
     "files.associations": {
-        "minishell_exec.h": "c",
+        "minishell.h": "c",
         "variant": "c",
         "chrono": "c"
     }

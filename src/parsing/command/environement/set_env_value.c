@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 22:34:03 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 23:17:01 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:28 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../Minishell_exec.h"
+#include "../../../Minishell.h"
 
 static char	*create_env_var(const char *env_name, const char *value)
 {

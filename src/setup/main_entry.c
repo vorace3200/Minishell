@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:53:50 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 23:00:48 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:51 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Minishell_exec.h"
+#include "../Minishell.h"
 
 void	main_entry(t_shell *shell)
 {

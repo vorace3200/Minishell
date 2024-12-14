@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:27:25 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/11 23:37:08 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:05 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 int	ft_atoi(const char *nptr)
 {

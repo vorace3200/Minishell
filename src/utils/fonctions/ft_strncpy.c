@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:57:10 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:30:40 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:23:21 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
 {

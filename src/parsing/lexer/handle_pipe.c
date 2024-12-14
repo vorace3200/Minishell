@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:01:26 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:18:39 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:43 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 int	handle_pipe(const char *input, int *i, t_token **tokens, t_token **tail)
 {

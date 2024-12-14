@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 22:32:30 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 23:15:49 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:23 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../Minishell_exec.h"
+#include "../../../Minishell.h"
 
 int	env_count(char **env)
 {

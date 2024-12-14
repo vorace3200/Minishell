@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:44:22 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:26:02 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:22 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 static void	init_args(t_command *cmd)
 {

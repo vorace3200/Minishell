@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:28:50 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:33:24 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:23:14 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

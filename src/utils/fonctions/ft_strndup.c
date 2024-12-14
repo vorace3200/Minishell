@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:33:33 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:35:02 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:23:24 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 char	*ft_strndup(const char *s, size_t n)
 {

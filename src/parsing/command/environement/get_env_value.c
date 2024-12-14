@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 22:31:30 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 23:15:53 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:26 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../Minishell_exec.h"
+#include "../../../Minishell.h"
 
 char	*get_env_value(t_shell *shell, char *env_name)
 {

@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:39:38 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 10:30:48 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:23:10 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

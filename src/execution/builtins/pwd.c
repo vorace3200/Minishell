@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 19:26:42 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 19:31:34 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:08 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 void	builtin_pwd(t_shell *shell)
 {

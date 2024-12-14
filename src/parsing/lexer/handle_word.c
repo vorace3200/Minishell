@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:50:24 by vorace32          #+#    #+#             */
-/*   Updated: 2024/11/04 15:17:43 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:54 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 void	handle_word(const char *input, int *i, t_token **tokens, t_token **tail)
 {

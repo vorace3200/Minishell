@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:51:26 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/14 14:17:36 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:46 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 char	*read_more_input(char quote)
 {

@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:05:49 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 23:10:41 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:21:55 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Minishell_exec.h"
+#include "../Minishell.h"
 
 void	redirect_fds(t_command *cmd)
 {

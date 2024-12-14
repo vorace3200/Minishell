@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:30:10 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 23:50:19 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:23:18 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 int	ft_strlen(const char *str)
 {

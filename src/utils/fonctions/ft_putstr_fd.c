@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:52:06 by vorace32          #+#    #+#             */
-/*   Updated: 2024/10/31 14:05:24 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:23:04 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

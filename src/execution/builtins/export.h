@@ -6,11 +6,11 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:57:12 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/12 23:58:30 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:22:07 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell_exec.h"
+#include "../../Minishell.h"
 
 static int	is_valid_identifier(const char *arg)
 {
