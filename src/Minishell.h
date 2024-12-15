@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/14 15:03:26 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/15 13:13:20 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ typedef struct s_shell
 	int					is_running;
 }						t_shell;
 
+// ==================== [ Signals ] ==================== //
+void					hook_signal(int signal);
+void					setup_signal(void);
+
 // ==================== [ Execution ] ==================== //
 void					execute_commands(t_shell *shell);
 void					execute_command(t_command *cmd, t_shell *shell);
@@ -98,6 +102,7 @@ void					builtin_cd(t_shell *shell, char **args);
 void					builtin_env(t_shell *shell);
 void					builtin_export(t_shell *shell, char **args);
 void					builtin_unset(t_shell *shell, char **args);
+
 // ==================== [ Environement ] ==================== //
 char					*get_env_value(t_shell *shell, char *env_name);
 int						set_env_value(t_shell *shell, const char *env_name,
@@ -109,9 +114,11 @@ int						env_count(char **env);
 void					add_redirection_to_command(t_command *cmd,
 							t_token_type type, char *filename);
 void					add_argument_to_command(t_command *cmd, char *arg);
+
 // ==================== [ Free ] ==================== //
 void					free_tokens(t_token *tokens);
 void					free_commands(t_command *cmd_list);
+
 // ==================== [ Lexer ] ==================== //
 t_token					*lexer(const char *input);
 void					handle_word(const char *input, int *i, t_token **tokens,
@@ -151,9 +158,9 @@ void					*ft_memcpy(void *dest, const void *src, size_t n);
 int						ft_strcmp(const char *s1, const char *s2);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 char					*ft_strchr(const char *s, int c);
-
 int						ft_isalnum(int c);
 int						ft_isdigit(int c);
+
 // ==================== [ Handle ] ==================== //
 void					handle_command(t_shell *shell);
 

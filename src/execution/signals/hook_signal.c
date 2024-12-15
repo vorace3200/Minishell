@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_loop.c                                        :+:      :+:    :+:   */
+/*   hook_signal.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 01:38:03 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/15 13:32:07 by vorace32         ###   ########.fr       */
+/*   Created: 2024/12/15 13:05:59 by vorace32          #+#    #+#             */
+/*   Updated: 2024/12/15 13:31:22 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Minishell.h"
+#include "../../Minishell.h"
 
-void	main_loop(t_shell *shell)
+void	hook_signal(int signal)
 {
-	shell->is_running = 1;
-	draw_logo();
-	setup_signal();
-	while (shell->is_running)
-	{
-		delay_write("\033[0;32mminishell\033[0;33m$\033[0m");
-		shell->input = readline(" ");
-		if (!shell->input)
-		{
-			shell->is_running = 0;
-			break ;
-		}
-		add_history(shell->input);
-		main_entry(shell);
-		free(shell->input);
-	}
+	(void)signal;
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	delay_write("\033[0;32mminishell\033[0;33m$\033[0m ");
 }
