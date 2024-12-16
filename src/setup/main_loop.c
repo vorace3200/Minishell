@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 01:38:03 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/15 15:08:31 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:50:36 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	main_loop(t_shell *shell)
 	setup_signal();
 	while (shell->is_running)
 	{
-		delay_write("\033[0;32mminishell\033[0;33m$\033[0m");
-		shell->input = readline(" ");
+		shell->input = readline("\033[0;32mminishell\033[0;33m$\033[0m ");
 		if (!shell->input)
 		{
 			shell->is_running = 0;

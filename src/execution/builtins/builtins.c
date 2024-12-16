@@ -6,11 +6,29 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:26:09 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/14 14:21:58 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:45:34 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Minishell.h"
+
+int	execute_builtin_with_redir(t_shell *shell, t_command *cmd)
+{
+	int	saved_stdin;
+	int	saved_stdout;
+
+	if (save_std_fds(&saved_stdin, &saved_stdout) == -1)
+		return (-1);
+	if (redirect_fds(cmd) == -1)
+	{
+		ft_putstr_fd("[ERROR] Redirection failed. Please check. \n", 2);
+		restore_fds(saved_stdin, saved_stdout);
+		return (-1);
+	}
+	if (execute_builtin(shell, cmd->args))
+		restore_fds(saved_stdin, saved_stdout);
+	return (1);
+}
 
 int	is_builtin(char **args)
 {

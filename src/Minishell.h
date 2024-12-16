@@ -6,17 +6,17 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/15 18:49:56 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:46:04 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <sys/fcntl.h>
 # include <sys/types.h>
@@ -90,7 +90,6 @@ void					setup_signal(void);
 // ==================== [ Execution ] ==================== //
 void					execute_commands(t_shell *shell);
 void					execute_command(t_command *cmd, t_shell *shell);
-void					redirect_fds(t_command *cmd);
 
 // ==================== [ Builtins ] ==================== //
 int						is_builtin(char **args);
@@ -160,7 +159,10 @@ int						ft_strncmp(const char *s1, const char *s2, size_t n);
 char					*ft_strchr(const char *s, int c);
 int						ft_isalnum(int c);
 int						ft_isdigit(int c);
-
+void					restore_fds(int saved_stdin, int saved_stdout);
+void					close_fds(t_command *cmd);
+int						save_std_fds(int *saved_stdin, int *saved_stdout);
+int						redirect_fds(t_command *cmd);
 // ==================== [ Handle ] ==================== //
 void					handle_command(t_shell *shell);
 

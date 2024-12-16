@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:02:58 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/14 14:21:56 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:51:46 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,48 +33,63 @@ static void	setup_pipes(t_command *cmd)
 		cmd->pipe_out_fd = -1;
 }
 
-static void	handle_child_process(t_command *cmd, t_shell *shell)
+static void	execute_single_builtin(t_shell *shell, t_command *cmd)
+{
+	int	saved_stdin;
+	int	saved_stdout;
+
+	if (save_std_fds(&saved_stdin, &saved_stdout) == -1)
+		return ;
+	if (redirect_fds(cmd) == -1)
+	{
+		restore_fds(saved_stdin, saved_stdout);
+		return ;
+	}
+	execute_builtin(shell, cmd->args);
+	restore_fds(saved_stdin, saved_stdout);
+}
+
+static void	execute_child_process(t_command *cmd, t_shell *shell)
 {
 	if (cmd->pipe_in_fd != -1)
-		close(cmd->pipe_in_fd);
+		dup2(cmd->pipe_in_fd, STDIN_FILENO);
 	if (cmd->pipe_out_fd != -1)
-		close(cmd->pipe_out_fd);
+		dup2(cmd->pipe_out_fd, STDOUT_FILENO);
+	close_fds(cmd);
 	execute_command(cmd, shell);
 }
 
-static void	close_fds(t_command *cmd)
-{
-	if (cmd->pipe_in_fd != -1)
-		close(cmd->pipe_in_fd);
-	if (cmd->pipe_out_fd != -1)
-		close(cmd->pipe_out_fd);
-}
-
-void	execute_commands(t_shell *shell)
+static void	execute_multiple_commands(t_shell *shell)
 {
 	t_command	*cmd;
 	pid_t		pid;
 	int			status;
 
 	cmd = shell->cmd_list;
-	if (cmd && cmd->next == NULL && is_builtin(cmd->args))
-	{
-		redirect_fds(cmd);
-		execute_builtin(shell, cmd->args);
-		return ;
-	}
 	while (cmd)
 	{
 		setup_pipes(cmd);
 		pid = fork();
 		if (pid == -1)
+		{
+			perror("fork");
 			exit(EXIT_FAILURE);
+		}
 		if (pid == 0)
-			handle_child_process(cmd, shell);
+			execute_child_process(cmd, shell);
 		close_fds(cmd);
 		cmd = cmd->next;
 	}
 	while (wait(&status) > 0)
 		;
 	shell->exit_status = WEXITSTATUS(status);
+}
+
+void	execute_commands(t_shell *shell)
+{
+	if (shell->cmd_list && shell->cmd_list->next == NULL
+		&& is_builtin(shell->cmd_list->args))
+		execute_single_builtin(shell, shell->cmd_list);
+	else
+		execute_multiple_commands(shell);
 }
