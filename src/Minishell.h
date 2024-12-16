@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/16 12:46:04 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/16 23:38:28 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int						handle_redirection(const char *input, int *i,
 							t_token **tokens, t_token **tail);
 int						handle_pipe(const char *input, int *i, t_token **tokens,
 							t_token **tail);
+void					handle_heredoc(t_command *cmd, char *delimiter);
 
 // ==================== [ Token ] ==================== //
 t_token					*create_token(char *value, t_token_type type);
@@ -165,7 +166,9 @@ int						save_std_fds(int *saved_stdin, int *saved_stdout);
 int						redirect_fds(t_command *cmd);
 // ==================== [ Handle ] ==================== //
 void					handle_command(t_shell *shell);
-
+void					handle_input_redir(t_command *cmd, char *file);
+void					handle_output_redir(t_command *cmd, char *file,
+							int append);
 // ==================== [ Setup ] ==================== //
 void					init_shell(t_shell *shell, char **env);
 void					main_loop(t_shell *shell);

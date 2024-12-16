@@ -45,8 +45,8 @@ SRC = main.c \
       $(SRC_DIR)/init/init_shell.c \
       $(SRC_DIR)/setup/main_loop.c $(SRC_DIR)/setup/main_entry.c  \
 	  $(SRC_DIR)/parsing/main_parsing.c \
-	  $(SRC_DIR)/parsing/lexer/handle_lexer.c $(SRC_DIR)/parsing/lexer/handle_quotes.c $(SRC_DIR)/parsing/lexer/handle_word.c $(SRC_DIR)/parsing/lexer/handle_pipe.c $(SRC_DIR)/parsing/lexer/handle_redirect.c\
-	  $(SRC_DIR)/parsing/command/handle_command.c $(SRC_DIR)/parsing/command/global_free.c $(SRC_DIR)/parsing/command/redirect_command.c\
+	  $(SRC_DIR)/parsing/lexer/handle_lexer.c $(SRC_DIR)/parsing/lexer/handle_quotes.c $(SRC_DIR)/parsing/lexer/handle_word.c $(SRC_DIR)/parsing/lexer/handle_pipe.c $(SRC_DIR)/parsing/lexer/handle_redirect.c $(SRC_DIR)/parsing/lexer/handle_heredoc.c \
+	  $(SRC_DIR)/parsing/command/handle_command.c $(SRC_DIR)/parsing/command/global_free.c $(SRC_DIR)/parsing/command/redirect_command.c $(SRC_DIR)/parsing/command/redirect_direction.c \
 	  $(SRC_DIR)/parsing/command/node/new_node.c \
 	  $(SRC_DIR)/parsing/command/token/create_token.c $(SRC_DIR)/parsing/command/token/add_tokens.c \
 	  $(SRC_DIR)/parsing/command/environement/get_env_value.c $(SRC_DIR)/parsing/command/environement/env_utils.c  $(SRC_DIR)/parsing/command/environement/set_env_value.c  $(SRC_DIR)/parsing/command/environement/unset_env_value.c \

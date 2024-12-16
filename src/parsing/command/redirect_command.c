@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:44:22 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/16 11:39:37 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/16 23:37:28 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,12 @@ void	add_argument_to_command(t_command *cmd, char *arg)
 void	add_redirection_to_command(t_command *cmd, t_token_type type,
 		char *file)
 {
-	int	flags;
-
 	if (type == TOKEN_REDIR_IN)
-	{
-		if (cmd->redir_in != -1)
-			close(cmd->redir_in);
-		cmd->redir_in = open(file, O_RDONLY);
-		if (cmd->redir_in < 0)
-			ft_putstr_fd("[ERROR] Failed to open input file.\n", 2);
-	}
-	else if (type == TOKEN_REDIR_OUT || type == TOKEN_D_REDIR_OUT)
-	{
-		if (cmd->redir_out != -1)
-			close(cmd->redir_out);
-		flags = O_WRONLY | O_CREAT;
-		if (type == TOKEN_REDIR_OUT)
-			flags |= O_TRUNC;
-		else
-			flags |= O_APPEND;
-		cmd->redir_out = open(file, flags, 0644);
-		if (cmd->redir_out < 0)
-			ft_putstr_fd("[ERROR] Failed to open output file.\n", 2);
-	}
+		handle_input_redir(cmd, file);
+	else if (type == TOKEN_REDIR_OUT)
+		handle_output_redir(cmd, file, 0);
+	else if (type == TOKEN_D_REDIR_OUT)
+		handle_output_redir(cmd, file, 1);
 	else if (type == TOKEN_D_REDIR_IN)
-		ft_putstr_fd("[ERROR] Here-doc not implemented.\n", 2);
+		handle_heredoc(cmd, file);
 }
