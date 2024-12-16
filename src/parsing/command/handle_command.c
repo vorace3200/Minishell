@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:47:29 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/14 14:22:20 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/16 00:21:35 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,15 @@ static int	handle_pipe_token(t_command **current_cmd, t_command **last_cmd,
 static int	handle_redirection_token(t_command **current_cmd, t_token **token,
 		t_command **last_cmd, t_shell *shell)
 {
+	t_token_type	redir_type;
+
 	if (!*current_cmd)
 	{
 		*current_cmd = initialize_command(last_cmd, shell);
 		if (!*current_cmd)
 			return (-1);
 	}
+	redir_type = (*token)->type;
 	*token = (*token)->next;
 	if (!*token || (*token)->type != TOKEN_WORD)
 	{
@@ -60,8 +63,7 @@ static int	handle_redirection_token(t_command **current_cmd, t_token **token,
 		shell->exit_status = ERROR;
 		return (-1);
 	}
-	add_redirection_to_command(*current_cmd, (*token)->prev->type,
-		(*token)->value);
+	add_redirection_to_command(*current_cmd, redir_type, (*token)->value);
 	return (0);
 }
 
