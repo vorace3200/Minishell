@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 13:05:59 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/16 12:50:53 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/16 23:20:01 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ void	hook_signal(int signal)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-	delay_write("\033[0;32mminishell\033[0;33m$\033[0m ");
+	printf("\033[0;32mminishell\033[0;33m$\033[0m ");
 }

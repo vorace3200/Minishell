@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:31:03 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/13 18:06:09 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/16 23:18:49 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	print_declared_env(char **env)
 	while (env[i])
 	{
 		egal = ft_strchr(env[i], '=');
-		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd("export ", 1);
 		if (egal)
 		{
 			write(1, env[i], egal - env[i]);
