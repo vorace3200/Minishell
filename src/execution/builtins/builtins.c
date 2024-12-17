@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:26:09 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/16 12:45:34 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:20:21 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	is_builtin(char **args)
 int	execute_builtin(t_shell *shell, char **args)
 {
 	if (ft_strcmp(args[0], "echo") == 0)
-		builtin_echo(args);
+		builtin_echo(shell, args);
 	else if (ft_strcmp(args[0], "exit") == 0)
 		builtin_exit(shell, args);
 	else if (ft_strcmp(args[0], "pwd") == 0)

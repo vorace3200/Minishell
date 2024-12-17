@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:27:04 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/14 15:00:21 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:20:49 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,10 @@ char	*remove_slash(const char *str)
 	return (result);
 }
 
-void	builtin_echo(char **args)
+static void	print_arg(char **args, int i)
 {
-	int		i;
-	int		newline;
 	char	*str;
 
-	newline = 1;
-	i = 1;
-	if (args[1] && ft_strcmp(args[1], "-n") == 0)
-	{
-		newline = 0;
-		i = 2;
-	}
 	while (args[i])
 	{
 		str = remove_slash(args[i]);
@@ -58,6 +49,22 @@ void	builtin_echo(char **args)
 			printf(" ");
 		i++;
 	}
+}
+
+void	builtin_echo(t_shell *shell, char **args)
+{
+	int	i;
+	int	newline;
+
+	newline = 1;
+	i = 1;
+	if (args[1] && ft_strcmp(args[1], "-n") == 0)
+	{
+		newline = 0;
+		i = 2;
+	}
+	print_arg(args, i);
 	if (newline)
 		printf("\n");
+	shell->exit_status = 0;
 }

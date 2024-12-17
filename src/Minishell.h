@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/16 23:38:28 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:20:09 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void					execute_command(t_command *cmd, t_shell *shell);
 // ==================== [ Builtins ] ==================== //
 int						is_builtin(char **args);
 int						execute_builtin(t_shell *shell, char **args);
-void					builtin_echo(char **args);
+void					builtin_echo(t_shell *shell, char **args);
 void					builtin_exit(t_shell *shell, char **args);
 void					builtin_pwd(t_shell *shell);
 void					builtin_cd(t_shell *shell, char **args);
@@ -108,6 +108,7 @@ int						set_env_value(t_shell *shell, const char *env_name,
 							const char *value);
 int						unset_env_value(t_shell *shell, const char *env_name);
 int						env_count(char **env);
+void					expand_variables(t_shell *shell);
 
 // ==================== [ Command ] ==================== //
 void					add_redirection_to_command(t_command *cmd,
@@ -164,6 +165,7 @@ void					restore_fds(int saved_stdin, int saved_stdout);
 void					close_fds(t_command *cmd);
 int						save_std_fds(int *saved_stdin, int *saved_stdout);
 int						redirect_fds(t_command *cmd);
+char					*ft_itoa(int n);
 // ==================== [ Handle ] ==================== //
 void					handle_command(t_shell *shell);
 void					handle_input_redir(t_command *cmd, char *file);
