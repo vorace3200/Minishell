@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:02:58 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/16 12:51:46 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:24:28 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	execute_single_builtin(t_shell *shell, t_command *cmd)
 	restore_fds(saved_stdin, saved_stdout);
 }
 
-static void	execute_child_process(t_command *cmd, t_shell *shell)
+void	execute_child_process(t_command *cmd, t_shell *shell)
 {
 	if (cmd->pipe_in_fd != -1)
 		dup2(cmd->pipe_in_fd, STDIN_FILENO);
@@ -62,21 +62,18 @@ static void	execute_child_process(t_command *cmd, t_shell *shell)
 static void	execute_multiple_commands(t_shell *shell)
 {
 	t_command	*cmd;
-	pid_t		pid;
 	int			status;
 
 	cmd = shell->cmd_list;
 	while (cmd)
 	{
 		setup_pipes(cmd);
-		pid = fork();
-		if (pid == -1)
+		if (skip_invalid_command(cmd, shell))
 		{
-			perror("fork");
-			exit(EXIT_FAILURE);
+			cmd = cmd->next;
+			continue ;
 		}
-		if (pid == 0)
-			execute_child_process(cmd, shell);
+		fork_and_execute(cmd, shell);
 		close_fds(cmd);
 		cmd = cmd->next;
 	}
@@ -89,7 +86,13 @@ void	execute_commands(t_shell *shell)
 {
 	if (shell->cmd_list && shell->cmd_list->next == NULL
 		&& is_builtin(shell->cmd_list->args))
+	{
+		shell->have_pipe = 0;
 		execute_single_builtin(shell, shell->cmd_list);
+	}
 	else
+	{
+		shell->have_pipe = 1;
 		execute_multiple_commands(shell);
+	}
 }

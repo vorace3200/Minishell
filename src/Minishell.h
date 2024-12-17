@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/17 16:20:09 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:18:42 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_command
 	int					pipe_out_fd;
 	int					redir_in;
 	int					redir_out;
+	int					invalid;
 	struct s_command	*next;
 	struct s_command	*prev;
 }						t_command;
@@ -81,6 +82,7 @@ typedef struct s_shell
 	t_command			*cmd_list;
 	int					exit_status;
 	int					is_running;
+	int					have_pipe;
 }						t_shell;
 
 // ==================== [ Signals ] ==================== //
@@ -90,6 +92,9 @@ void					setup_signal(void);
 // ==================== [ Execution ] ==================== //
 void					execute_commands(t_shell *shell);
 void					execute_command(t_command *cmd, t_shell *shell);
+int						skip_invalid_command(t_command *cmd, t_shell *shell);
+void					fork_and_execute(t_command *cmd, t_shell *shell);
+void					execute_child_process(t_command *cmd, t_shell *shell);
 
 // ==================== [ Builtins ] ==================== //
 int						is_builtin(char **args);

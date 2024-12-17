@@ -6,11 +6,35 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:05:49 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/17 16:49:43 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:07:06 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Minishell.h"
+
+int	skip_invalid_command(t_command *cmd, t_shell *shell)
+{
+	if (cmd->invalid == 1)
+	{
+		shell->exit_status = 1;
+		return (1);
+	}
+	return (0);
+}
+
+void	fork_and_execute(t_command *cmd, t_shell *shell)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	if (pid == 0)
+		execute_child_process(cmd, shell);
+}
 
 int	redirect_fds(t_command *cmd)
 {

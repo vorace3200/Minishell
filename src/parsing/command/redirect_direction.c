@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:33:02 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/16 23:40:39 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:24:18 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	handle_input_redir(t_command *cmd, char *file)
 		close(cmd->redir_in);
 	cmd->redir_in = open(file, O_RDONLY);
 	if (cmd->redir_in < 0)
+	{
 		ft_putstr_fd("[ERROR] Failed to open input file.\n", 2);
+		cmd->invalid = 1;
+	}
 }
 
 void	handle_output_redir(t_command *cmd, char *file, int append)
