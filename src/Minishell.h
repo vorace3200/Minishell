@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/17 17:18:42 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:05:02 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ int						set_env_value(t_shell *shell, const char *env_name,
 int						unset_env_value(t_shell *shell, const char *env_name);
 int						env_count(char **env);
 void					expand_variables(t_shell *shell);
-
+char					*find_command_in_path(const char *cmd,
+							const char *path);
 // ==================== [ Command ] ==================== //
 void					add_redirection_to_command(t_command *cmd,
 							t_token_type type, char *filename);
@@ -123,7 +124,7 @@ void					add_argument_to_command(t_command *cmd, char *arg);
 // ==================== [ Free ] ==================== //
 void					free_tokens(t_token *tokens);
 void					free_commands(t_command *cmd_list);
-
+void					free_env(char **env);
 // ==================== [ Lexer ] ==================== //
 t_token					*lexer(const char *input);
 void					handle_word(const char *input, int *i, t_token **tokens,
@@ -166,6 +167,7 @@ int						ft_strncmp(const char *s1, const char *s2, size_t n);
 char					*ft_strchr(const char *s, int c);
 int						ft_isalnum(int c);
 int						ft_isdigit(int c);
+void					handle_execve_error(t_command *cmd);
 void					restore_fds(int saved_stdin, int saved_stdout);
 void					close_fds(t_command *cmd);
 int						save_std_fds(int *saved_stdin, int *saved_stdout);

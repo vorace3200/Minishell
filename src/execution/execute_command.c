@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:05:49 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/17 17:07:06 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:04:45 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,38 @@ int	redirect_fds(t_command *cmd)
 	return (0);
 }
 
+char	*get_command_path(t_command *cmd, t_shell *shell)
+{
+	char	*path;
+	char	*cmd_path;
+
+	path = get_env_value(shell, "PATH");
+	if (!path || ft_strlen(path) == 0)
+		handle_execve_error(cmd);
+	cmd_path = find_command_in_path(cmd->args[0], path);
+	if (!cmd_path)
+		handle_execve_error(cmd);
+	return (cmd_path);
+}
+
 void	execute_command(t_command *cmd, t_shell *shell)
 {
+	char	*cmd_path;
+
 	redirect_fds(cmd);
 	if (is_builtin(cmd->args))
 	{
 		execute_builtin(shell, cmd->args);
 		exit(shell->exit_status);
 	}
-	if (execvp(cmd->args[0], cmd->args) == -1)
+	if (cmd->args[0][0] == '/' || cmd->args[0][0] == '.')
+		execve(cmd->args[0], cmd->args, shell->env);
+	else
 	{
-		ft_putstr_fd("bash: ", 2);
-		ft_putstr_fd(cmd->args[0], 2);
-		ft_putstr_fd(" command not found\n", 2);
-		exit(127);
+		cmd_path = get_command_path(cmd, shell);
+		execve(cmd_path, cmd->args, shell->env);
+		free(cmd_path);
 	}
+	perror("execve");
+	exit(127);
 }

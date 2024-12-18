@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 01:38:03 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/16 11:50:36 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:04:18 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	main_loop(t_shell *shell)
 		main_entry(shell);
 		free(shell->input);
 	}
+	free_env(shell->env);
 }
