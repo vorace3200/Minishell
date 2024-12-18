@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:27:04 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/17 16:20:49 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:51:28 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ void	builtin_echo(t_shell *shell, char **args)
 	print_arg(args, i);
 	if (newline)
 		printf("\n");
+	else
+		printf("%%\n");
 	shell->exit_status = 0;
 }
