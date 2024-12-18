@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   Minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
+/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 16:36:10 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/12/19 00:46:38 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
 # include <sys/fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <unistd.h>
 
 # define SUCCESS 0
 # define ERROR -1
@@ -57,6 +57,8 @@ typedef struct s_token
 	t_token_type		type;
 	struct s_token		*next;
 	struct s_token		*prev;
+	int					was_single_quoted;
+	int					was_double_quoted;
 }						t_token;
 
 typedef struct s_command
@@ -84,6 +86,15 @@ typedef struct s_shell
 	int					is_running;
 	int					have_pipe;
 }						t_shell;
+
+typedef struct s_quote_process
+{
+	t_shell				*shell;
+	const char			*arg;
+	int					*i;
+	char				**res;
+	int					in_single;
+}						t_quote_process;
 
 // ==================== [ Signals ] ==================== //
 void					hook_signal(int signal);
@@ -116,6 +127,7 @@ int						env_count(char **env);
 void					expand_variables(t_shell *shell);
 char					*find_command_in_path(const char *cmd,
 							const char *path);
+char					*get_var_name(const char *str, int *len);
 // ==================== [ Command ] ==================== //
 void					add_redirection_to_command(t_command *cmd,
 							t_token_type type, char *filename);
@@ -136,7 +148,6 @@ int						handle_redirection(const char *input, int *i,
 int						handle_pipe(const char *input, int *i, t_token **tokens,
 							t_token **tail);
 void					handle_heredoc(t_command *cmd, char *delimiter);
-
 // ==================== [ Token ] ==================== //
 t_token					*create_token(char *value, t_token_type type);
 void					add_token(t_token **head, t_token **tail,
@@ -164,6 +175,8 @@ char					*ft_strjoin(char const *s1, char const *s2);
 void					*ft_memcpy(void *dest, const void *src, size_t n);
 int						ft_strcmp(const char *s1, const char *s2);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
+char					*process_char(t_shell *shell, const char *arg, int *i,
+							char **res);
 char					*ft_strchr(const char *s, int c);
 int						ft_isalnum(int c);
 int						ft_isdigit(int c);

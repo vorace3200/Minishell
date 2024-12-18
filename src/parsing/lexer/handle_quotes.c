@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:51:26 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/14 14:22:46 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 00:47:35 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,39 @@ int	read_until_closing_quote(char **input, int *i, char quote)
 	return (0);
 }
 
+static char	*wrap_with_quotes(char *value, char quote)
+{
+	char	*tmp;
+	char	*final;
+
+	if (quote != '\'')
+		return (value);
+	tmp = ft_strjoin("'", value);
+	free(value);
+	final = ft_strjoin_free(tmp, "'");
+	return (final);
+}
+
 int	handle_quotes(char **input, int *i, t_token **tokens, t_token **tail)
 {
 	char	quote;
 	int		start;
 	char	*value;
 
-	if ((*input)[*i] == '\'' || (*input)[*i] == '\"')
+	if ((*input)[*i] != '\'' && (*input)[*i] != '"')
+		return (0);
+	quote = (*input)[(*i)++];
+	start = *i;
+	if (read_until_closing_quote(input, i, quote) == -1)
+		return (-1);
+	value = ft_strndup(*input + start, *i - start);
+	(*i)++;
+	if (!value || !*value)
 	{
-		quote = (*input)[(*i)++];
-		start = *i;
-		if (read_until_closing_quote(input, i, quote) == -1)
-			return (-1);
-		value = ft_strndup(*input + start, *i - start);
-		(*i)++;
-		if (value && *value)
-			add_token(tokens, tail, create_token(value, TOKEN_WORD));
-		else
-			free(value);
+		free(value);
 		return (1);
 	}
-	return (0);
+	value = wrap_with_quotes(value, quote);
+	add_token(tokens, tail, create_token(value, TOKEN_WORD));
+	return (1);
 }

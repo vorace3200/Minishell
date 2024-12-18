@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:02:58 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 22:19:14 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/18 22:22:48 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ static void	setup_pipes(t_command *cmd)
 	if (cmd->pipe_out)
 	{
 		if (pipe(pipefd) == -1)
-		{
-			perror("pipe");
 			exit(EXIT_FAILURE);
-		}
 		cmd->pipe_out_fd = pipefd[1];
 		if (cmd->next)
 			cmd->next->pipe_in_fd = pipefd[0];

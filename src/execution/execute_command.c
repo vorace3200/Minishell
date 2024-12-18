@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:05:49 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 16:19:00 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/18 22:22:45 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ void	fork_and_execute(t_command *cmd, t_shell *shell)
 
 	pid = fork();
 	if (pid == -1)
-	{
-		perror("fork");
 		exit(EXIT_FAILURE);
-	}
 	if (pid == 0)
 		execute_child_process(cmd, shell);
 }
@@ -94,6 +91,5 @@ void	execute_command(t_command *cmd, t_shell *shell)
 		execve(cmd_path, cmd->args, shell->env);
 		free(cmd_path);
 	}
-	perror("execve");
 	exit(127);
 }
