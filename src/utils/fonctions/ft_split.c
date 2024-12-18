@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
+/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 19:08:52 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/14 14:23:06 by vorace32         ###   ########.fr       */
+/*   Created: 2024/01/12 15:24:45 by tbrunier          #+#    #+#             */
+/*   Updated: 2024/12/18 16:38:36 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,58 +25,76 @@ void	ft_free_split(char **split)
 	free(split);
 }
 
-int	word_count(char *str, char delimiter)
+unsigned int	count_words(char const *str, char c)
 {
-	int	i;
-	int	wc;
+	unsigned int	i;
+	unsigned int	j;
 
 	i = 0;
-	wc = 0;
-	while (str[i])
+	j = 0;
+	while (str[i] != '\n' && str[i] != '\0')
 	{
-		while (str[i] && str[i] == delimiter)
-			i++;
-		if (str[i])
-			wc++;
-		while (str[i] && str[i] != delimiter)
-			i++;
+		if (str[i] != c && (str[i + 1] == c
+				|| str[i + 1] == '\0' || str[i + 1] == '\n'))
+			j++;
+		i++;
 	}
-	return (wc);
+	return (j);
 }
 
-char	*create_word(char *str, int start, int end)
+unsigned int	ft_strlen_sep(char const *str, char c)
 {
-	char	*word;
+	unsigned int	i;
 
-	word = (char *)malloc(sizeof(char) * (end - start + 1));
+	i = 0;
+	while (str[i] != '\0' && str[i] != c)
+		i++;
+	return (i);
+}
+
+char	*get_word(char const *str, char c)
+{
+	char			*word;
+	unsigned int	i;
+
+	i = 0;
+	word = malloc(sizeof(char) * (ft_strlen_sep(str, c) + 1));
 	if (!word)
 		return (NULL);
-	ft_strncpy(word, str + start, end - start);
+	while (i < ft_strlen_sep(str, c))
+	{
+		word[i] = str[i];
+		i++;
+	}
+	word[i] = '\0';
 	return (word);
 }
 
-char	**ft_split(char *str, char delimiter)
+char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		start;
-	int		k;
-	char	**out;
+	char			**tab;
+	unsigned int	i;
 
 	i = 0;
-	k = 0;
-	out = (char **)malloc(sizeof(char *) * (word_count(str, delimiter) + 1));
-	if (!out)
+	tab = malloc(sizeof(char *) * (count_words(s, c) + 1));
+	if (!tab)
 		return (NULL);
-	while (str[i])
+	while (*s != '\0' && *s != '\n')
 	{
-		while (str[i] && str[i] == delimiter)
-			i++;
-		start = i;
-		while (str[i] && str[i] != delimiter)
-			i++;
-		if (i > start)
-			out[k++] = create_word(str, start, i);
+		while ((*s != '\0' && *s != '\n') && *s == c)
+			s++;
+		if (*s != '\0' && *s != '\n')
+		{
+			tab[i++] = get_word(s, c);
+			if (!tab[i - 1])
+			{
+				while (i > 0)
+					free(tab[--i]);
+				return (free(tab), NULL);
+			}
+		}
+		while ((*s != '\0' && *s != '\n') && *s != c)
+			s++;
 	}
-	out[k] = NULL;
-	return (out);
+	return (tab[i] = 0, tab);
 }

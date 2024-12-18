@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
+/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 16:18:43 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:36:10 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ t_command				*new_command_node(void);
 // ==================== [ Utils ] ==================== //
 void					delay_write(const char *prompt);
 void					draw_logo(void);
-char					**ft_split(char *str, char delimiter);
+char					**ft_split(char const *s, char c);
 void					ft_free_split(char **split);
 char					*ft_strncpy(char *dest, const char *src, size_t n);
 char					*ft_strdup(const char *s);
