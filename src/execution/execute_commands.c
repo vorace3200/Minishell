@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:02:58 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/17 17:24:28 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/18 22:19:14 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ static void	execute_multiple_commands(t_shell *shell)
 	cmd = shell->cmd_list;
 	while (cmd)
 	{
+		if (cmd->invalid == 1)
+		{
+			shell->exit_status = 1;
+			return ;
+		}
 		setup_pipes(cmd);
 		if (skip_invalid_command(cmd, shell))
 		{
