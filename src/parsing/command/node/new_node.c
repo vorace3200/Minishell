@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_node.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
+/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:48:32 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/14 14:22:32 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:48:49 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_command	*new_command_node(void)
 	cmd->pipe_out_fd = -1;
 	cmd->redir_in = -1;
 	cmd->redir_out = -1;
+	cmd->invalid = 0;
 	cmd->next = NULL;
 	cmd->prev = NULL;
 	return (cmd);
