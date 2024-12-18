@@ -2,6 +2,8 @@
     "files.associations": {
         "minishell.h": "c",
         "variant": "c",
-        "chrono": "c"
+        "chrono": "c",
+        "readline.h": "c",
+        "history.h": "c"
     }
 }

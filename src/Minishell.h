@@ -6,22 +6,22 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 16:05:02 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:18:43 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <sys/fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <unistd.h>
 
 # define SUCCESS 0
 # define ERROR -1
@@ -167,7 +167,7 @@ int						ft_strncmp(const char *s1, const char *s2, size_t n);
 char					*ft_strchr(const char *s, int c);
 int						ft_isalnum(int c);
 int						ft_isdigit(int c);
-void					handle_execve_error(t_command *cmd);
+void					handle_execve_error(char *cmd);
 void					restore_fds(int saved_stdin, int saved_stdout);
 void					close_fds(t_command *cmd);
 int						save_std_fds(int *saved_stdin, int *saved_stdout);

@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:05:49 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 16:04:45 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:19:00 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,15 @@ int	redirect_fds(t_command *cmd)
 	return (0);
 }
 
-char	*get_command_path(t_command *cmd, t_shell *shell)
+static char	*get_path_command(t_shell *shell, char *cmd)
 {
 	char	*path;
 	char	*cmd_path;
 
 	path = get_env_value(shell, "PATH");
 	if (!path || ft_strlen(path) == 0)
-		handle_execve_error(cmd);
-	cmd_path = find_command_in_path(cmd->args[0], path);
-	if (!cmd_path)
-		handle_execve_error(cmd);
+		return (NULL);
+	cmd_path = find_command_in_path(cmd, path);
 	return (cmd_path);
 }
 
@@ -87,7 +85,12 @@ void	execute_command(t_command *cmd, t_shell *shell)
 		execve(cmd->args[0], cmd->args, shell->env);
 	else
 	{
-		cmd_path = get_command_path(cmd, shell);
+		cmd_path = get_path_command(shell, cmd->args[0]);
+		if (!cmd_path)
+		{
+			handle_execve_error(cmd->args[0]);
+			exit(127);
+		}
 		execve(cmd_path, cmd->args, shell->env);
 		free(cmd_path);
 	}
