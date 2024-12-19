@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 13:05:59 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 16:34:58 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:36:14 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	heredoc_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
-		write(STDOUT_FILENO, "\n", 1);
 		g_global_signal = 130;
 	}
 	else if (signal == SIGQUIT)
