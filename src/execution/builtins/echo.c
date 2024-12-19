@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:27:04 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 16:51:28 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:17:45 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,37 @@ char	*remove_slash(const char *str)
 	result[j] = '\0';
 	return (result);
 }
-
 static void	print_arg(char **args, int i)
 {
-	char	*str;
+	int		j;
+	int		in_single;
+	int		in_double;
+	char	*arg;
 
 	while (args[i])
 	{
-		str = remove_slash(args[i]);
-		if (str)
+		in_single = 0;
+		in_double = 0;
+		arg = args[i];
+		j = 0;
+		while (arg[j])
 		{
-			printf("%s", str);
-			free(str);
+			if (arg[j] == '\'' && !in_double)
+				in_single = !in_single;
+			else if (arg[j] == '\"' && !in_single)
+				in_double = !in_double;
+			else if (arg[j] == '\\' && !in_single && !in_double && arg[j + 1])
+			{
+				j++;
+				if (arg[j])
+					write(1, &arg[j], 1);
+			}
+			else
+				write(1, &arg[j], 1);
+			j++;
 		}
 		if (args[i + 1])
-			printf(" ");
+			write(1, " ", 1);
 		i++;
 	}
 }
@@ -66,7 +82,5 @@ void	builtin_echo(t_shell *shell, char **args)
 	print_arg(args, i);
 	if (newline)
 		printf("\n");
-	else
-		printf("%%\n");
 	shell->exit_status = 0;
 }
