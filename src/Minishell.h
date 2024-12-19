@@ -3,31 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   Minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
+/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 14:59:03 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:14:43 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <sys/fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <unistd.h>
 
 # define SUCCESS 0
 # define ERROR -1
 # define MALLOC_ERROR -2
 # define FORK_ERROR -3
 # define EXEC_ERROR -4
+# define PROMPT "\001\033[0;32m\002minishell\001\033[0;33m\002$\001\033[0m\002 "
 
 # define RESET "\033[0m"
 # define BLACK "\033[30m"

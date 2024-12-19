@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
+/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 01:38:03 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 01:02:12 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:14:17 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	main_loop(t_shell *shell)
 	while (shell->is_running)
 	{
 		setup_signal();
-		shell->input = readline("\033[0;32mminishell\033[0;33m$\033[0m ");
+		shell->input = readline(PROMPT);
 		if (!shell->input)
 		{
 			shell->is_running = 0;
