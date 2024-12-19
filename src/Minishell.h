@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   Minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
+/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 15:36:13 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:15:26 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
 # include <sys/fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <unistd.h>
 
 # define SUCCESS 0
 # define ERROR -1
@@ -40,6 +40,8 @@
 # define CYAN "\033[36m"
 # define WHITE "\033[37m"
 # define BOLD "\033[1m"
+
+extern int				g_global_signal;
 
 typedef enum e_token_type
 {
@@ -101,6 +103,8 @@ typedef struct s_quote_process
 // ==================== [ Signals ] ==================== //
 void					hook_signal(int signal);
 void					setup_signal(void);
+void					reset_signal(void);
+void					heredoc_signal(int signal);
 
 // ==================== [ Execution ] ==================== //
 void					execute_commands(t_shell *shell);

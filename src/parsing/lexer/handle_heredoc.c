@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:35:49 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/16 23:39:00 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:15:26 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,17 @@ void	write_heredoc_lines(int write_end, char *delim)
 {
 	char	*line;
 
+	g_global_signal = 0;
+	signal(SIGINT, heredoc_signal);
 	while (1)
 	{
 		line = readline("> ");
+		if (g_global_signal == 130)
+		{
+			free(line);
+			close(write_end);
+			return ;
+		}
 		if (!line || ft_strcmp(line, delim) == 0)
 		{
 			free(line);
@@ -45,6 +53,7 @@ void	write_heredoc_lines(int write_end, char *delim)
 		ft_putstr_fd("\n", write_end);
 		free(line);
 	}
+	reset_signal();
 }
 
 void	handle_heredoc(t_command *cmd, char *delimiter)
