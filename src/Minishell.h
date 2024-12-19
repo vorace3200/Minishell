@@ -6,22 +6,22 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 01:02:02 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:20:56 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <sys/fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <unistd.h>
 
 # define SUCCESS 0
 # define ERROR -1
@@ -137,6 +137,7 @@ void					add_argument_to_command(t_command *cmd, char *arg);
 void					free_tokens(t_token *tokens);
 void					free_commands(t_command *cmd_list);
 void					free_env(t_shell *shell);
+void    				cleanup_command_list(t_shell *shell);
 // ==================== [ Lexer ] ==================== //
 t_token					*lexer(const char *input);
 void					handle_word(const char *input, int *i, t_token **tokens,
@@ -180,7 +181,7 @@ char					*process_char(t_shell *shell, const char *arg, int *i,
 char					*ft_strchr(const char *s, int c);
 int						ft_isalnum(int c);
 int						ft_isdigit(int c);
-void					handle_execve_error(char *cmd);
+void					handle_execve_error(t_shell *shell, char *cmd);
 void					restore_fds(int saved_stdin, int saved_stdout);
 void					close_fds(t_command *cmd);
 int						save_std_fds(int *saved_stdin, int *saved_stdout);

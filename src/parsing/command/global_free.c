@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:42:35 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 01:09:19 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:20:40 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,11 @@ void	free_env(t_shell *shell)
 	}
 }
 
-void	handle_execve_error(char *cmd)
+void	handle_execve_error(t_shell *shell, char *cmd)
 {
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": command not found\n", 2);
+	cleanup_command_list(shell);
 	exit(127);
 }

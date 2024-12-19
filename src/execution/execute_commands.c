@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:02:58 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 22:22:48 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:17:53 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void	execute_multiple_commands(t_shell *shell)
 	while (wait(&status) > 0)
 		;
 	shell->exit_status = WEXITSTATUS(status);
+	cleanup_command_list(shell);
 }
 
 void	execute_commands(t_shell *shell)
@@ -91,6 +92,7 @@ void	execute_commands(t_shell *shell)
 	{
 		shell->have_pipe = 0;
 		execute_single_builtin(shell, shell->cmd_list);
+		cleanup_command_list(shell);
 	}
 	else
 	{

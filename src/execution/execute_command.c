@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:05:49 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 22:22:45 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:21:28 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,22 @@ void	execute_command(t_command *cmd, t_shell *shell)
 	if (is_builtin(cmd->args))
 	{
 		execute_builtin(shell, cmd->args);
+		cleanup_command_list(shell);
 		exit(shell->exit_status);
 	}
-	if (cmd->args[0][0] == '/' || cmd->args[0][0] == '.')
-		execve(cmd->args[0], cmd->args, shell->env);
+ 	if (cmd->args[0][0] == '/' || cmd->args[0][0] == '.')
+    {
+        execve(cmd->args[0], cmd->args, shell->env);
+        cleanup_command_list(shell);
+	}
 	else
 	{
 		cmd_path = get_path_command(shell, cmd->args[0]);
 		if (!cmd_path)
-		{
-			handle_execve_error(cmd->args[0]);
-			exit(127);
-		}
+			handle_execve_error(shell, cmd->args[0]);
 		execve(cmd_path, cmd->args, shell->env);
 		free(cmd_path);
 	}
+	cleanup_command_list(shell);
 	exit(127);
 }
