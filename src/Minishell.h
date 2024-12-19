@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   Minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
+/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 16:15:26 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:50:40 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h>
+# include <stdlib.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <sys/fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -60,7 +60,6 @@ typedef struct s_token
 	t_token_type		type;
 	struct s_token		*next;
 	struct s_token		*prev;
-	int					was_single_quoted;
 	int					was_double_quoted;
 }						t_token;
 
