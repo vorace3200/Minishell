@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
+/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:05:49 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 01:43:47 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:50:56 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,5 @@ void	execute_command(t_command *cmd, t_shell *shell)
 		execve(cmd_path, cmd->args, shell->env);
 		free(cmd_path);
 	}
-	cleanup_command_list(shell);
-	free_env(shell);
-	exit(127);
+	return (cleanup_command_list(shell), free_env(shell), exit(127));
 }
