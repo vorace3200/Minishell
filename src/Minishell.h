@@ -6,7 +6,7 @@
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 15:14:43 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:36:13 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,8 @@ void					close_fds(t_command *cmd);
 int						save_std_fds(int *saved_stdin, int *saved_stdout);
 int						redirect_fds(t_command *cmd);
 char					*ft_itoa(int n);
+int						is_input_empty(char *input);
+
 // ==================== [ Handle ] ==================== //
 void					handle_command(t_shell *shell);
 void					handle_input_redir(t_command *cmd, char *file);

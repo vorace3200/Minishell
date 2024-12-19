@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_loop.c                                        :+:      :+:    :+:   */
+/*   is_input_empty.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 01:38:03 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 15:41:28 by tbrunier         ###   ########.fr       */
+/*   Created: 2024/12/19 15:27:22 by tbrunier          #+#    #+#             */
+/*   Updated: 2024/12/19 15:38:58 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Minishell.h"
+#include "../../Minishell.h"
 
-void	main_loop(t_shell *shell)
+int	is_input_empty(char *input)
 {
-	shell->is_running = 1;
-	draw_logo();
-	while (shell->is_running)
+	unsigned int	i;
+
+	i = 0;
+	while (input[i])
 	{
-		setup_signal();
-		shell->input = readline(PROMPT);
-		if (!shell->input)
-		{
-			shell->is_running = 0;
-			break ;
-		}
-		if (!is_input_empty(shell->input))
-			add_history(shell->input);
-		main_entry(shell);
-		free(shell->input);
+		if (!(input[i] == '\t'))
+			return (0);
+		i++;
 	}
-	free_env(shell);
+	return (1);
 }
