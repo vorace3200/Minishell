@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:42:35 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 16:18:22 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:09:19 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	free_commands(t_command *cmd_list)
 	}
 }
 
-void	free_env(char **env)
+void	clean_up(char **env)
 {
 	unsigned int	i;
 
@@ -62,6 +62,26 @@ void	free_env(char **env)
 		i++;
 	}
 	free(env);
+}
+
+void	free_env(t_shell *shell)
+{
+	rl_clear_history();
+	if (shell->cmd_list)
+	{
+		free_commands(shell->cmd_list);
+		shell->cmd_list = NULL;
+	}
+	if (shell->env)
+	{
+		clean_up(shell->env);
+		shell->env = NULL;
+	}
+	if (shell->input)
+	{
+		free(shell->input);
+		shell->input = NULL;
+	}
 }
 
 void	handle_execve_error(char *cmd)
