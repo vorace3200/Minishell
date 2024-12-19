@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:35:49 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 16:15:26 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:28:55 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ void	handle_heredoc(t_command *cmd, char *delimiter)
 	read_end = combined >> 16;
 	write_end = combined & 0xFFFF;
 	write_heredoc_lines(write_end, delimiter);
+	if (g_global_signal == 130)
+	{
+		close(read_end);
+		return ;
+	}
 	close_heredoc_fds(write_end);
 	if (cmd->redir_in != -1)
 		close(cmd->redir_in);
