@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:26:09 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/17 16:20:21 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:41:18 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	execute_builtin_with_redir(t_shell *shell, t_command *cmd)
 		restore_fds(saved_stdin, saved_stdout);
 		return (-1);
 	}
-	if (execute_builtin(shell, cmd->args))
+	if (execute_builtin(shell, cmd))
 		restore_fds(saved_stdin, saved_stdout);
 	return (1);
 }
@@ -51,21 +51,21 @@ int	is_builtin(char **args)
 	return (0);
 }
 
-int	execute_builtin(t_shell *shell, char **args)
+int	execute_builtin(t_shell *shell, t_command *cmd)
 {
-	if (ft_strcmp(args[0], "echo") == 0)
-		builtin_echo(shell, args);
-	else if (ft_strcmp(args[0], "exit") == 0)
-		builtin_exit(shell, args);
-	else if (ft_strcmp(args[0], "pwd") == 0)
+	if (ft_strcmp(cmd->args[0], "echo") == 0)
+		builtin_echo(shell, cmd->args, cmd->have_quote);
+	else if (ft_strcmp(cmd->args[0], "exit") == 0)
+		builtin_exit(shell, cmd->args);
+	else if (ft_strcmp(cmd->args[0], "pwd") == 0)
 		builtin_pwd(shell);
-	else if (ft_strcmp(args[0], "cd") == 0)
-		builtin_cd(shell, args);
-	else if (ft_strcmp(args[0], "export") == 0)
-		builtin_export(shell, args);
-	else if (ft_strcmp(args[0], "unset") == 0)
-		builtin_unset(shell, args);
-	else if (ft_strcmp(args[0], "env") == 0)
+	else if (ft_strcmp(cmd->args[0], "cd") == 0)
+		builtin_cd(shell, cmd->args);
+	else if (ft_strcmp(cmd->args[0], "export") == 0)
+		builtin_export(shell, cmd->args);
+	else if (ft_strcmp(cmd->args[0], "unset") == 0)
+		builtin_unset(shell, cmd->args);
+	else if (ft_strcmp(cmd->args[0], "env") == 0)
 		builtin_env(shell);
 	else
 		return (0);

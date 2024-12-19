@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_node.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
+/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:48:32 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 16:48:49 by tbrunier         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:24:38 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_command	*new_command_node(void)
 	if (!cmd)
 		return (NULL);
 	cmd->args = NULL;
+	cmd->args_size = 0;
 	cmd->args_size = 0;
 	cmd->args_count = 0;
 	cmd->cmd_path = NULL;

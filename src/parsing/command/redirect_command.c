@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:44:22 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/16 23:37:28 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:56:26 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	resize_args(t_command *cmd)
 	cmd->args_size = new_size;
 }
 
-void	add_argument_to_command(t_command *cmd, char *arg)
+void	add_argument_to_command(t_command *cmd, char *arg, int is_quoted)
 {
 	if (!cmd->args)
 		init_args(cmd);
@@ -53,6 +53,8 @@ void	add_argument_to_command(t_command *cmd, char *arg)
 		resize_args(cmd);
 	cmd->args[cmd->args_count++] = ft_strdup(arg);
 	cmd->args[cmd->args_count] = NULL;
+	if (is_quoted)
+		cmd->have_quote = 1;
 }
 
 void	add_redirection_to_command(t_command *cmd, t_token_type type,

@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:47:29 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/16 00:21:35 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:56:45 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ static int	process_token(t_token **token, t_command **current_cmd,
 			if (!*current_cmd)
 				return (-1);
 		}
-		add_argument_to_command(*current_cmd, (*token)->value);
+		add_argument_to_command(*current_cmd, (*token)->value,
+			(*token)->was_double_quoted);
 	}
 	else if ((*token)->type == TOKEN_PIPE)
 		return (handle_pipe_token(current_cmd, last_cmd, shell));

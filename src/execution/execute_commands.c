@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 23:02:58 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 01:17:53 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:16:51 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	execute_single_builtin(t_shell *shell, t_command *cmd)
 		restore_fds(saved_stdin, saved_stdout);
 		return ;
 	}
-	execute_builtin(shell, cmd->args);
+	execute_builtin(shell, cmd);
 	restore_fds(saved_stdin, saved_stdout);
 }
 

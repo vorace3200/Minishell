@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:51:26 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 00:47:35 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:56:59 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	handle_quotes(char **input, int *i, t_token **tokens, t_token **tail)
 	char	quote;
 	int		start;
 	char	*value;
+	t_token	*new_token;
 
 	if ((*input)[*i] != '\'' && (*input)[*i] != '"')
 		return (0);
@@ -93,6 +94,8 @@ int	handle_quotes(char **input, int *i, t_token **tokens, t_token **tail)
 		return (1);
 	}
 	value = wrap_with_quotes(value, quote);
-	add_token(tokens, tail, create_token(value, TOKEN_WORD));
+	new_token = create_token(value, TOKEN_WORD);
+	new_token->was_double_quoted = 1;
+	add_token(tokens, tail, new_token);
 	return (1);
 }

@@ -6,22 +6,22 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 00:28:14 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 01:45:12 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:59:03 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
 # include <sys/fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <unistd.h>
 
 # define SUCCESS 0
 # define ERROR -1
@@ -67,6 +67,7 @@ typedef struct s_command
 	int					args_size;
 	int					args_count;
 	char				*cmd_path;
+	char				have_quote;
 	int					pipe_in;
 	int					pipe_out;
 	int					pipe_in_fd;
@@ -109,8 +110,9 @@ void					execute_child_process(t_command *cmd, t_shell *shell);
 
 // ==================== [ Builtins ] ==================== //
 int						is_builtin(char **args);
-int						execute_builtin(t_shell *shell, char **args);
-void					builtin_echo(t_shell *shell, char **args);
+int						execute_builtin(t_shell *shell, t_command *cmd);
+void					builtin_echo(t_shell *shell, char **args,
+							int have_quote);
 void					builtin_exit(t_shell *shell, char **args);
 void					builtin_pwd(t_shell *shell);
 void					builtin_cd(t_shell *shell, char **args);
@@ -131,7 +133,8 @@ char					*get_var_name(const char *str, int *len);
 // ==================== [ Command ] ==================== //
 void					add_redirection_to_command(t_command *cmd,
 							t_token_type type, char *filename);
-void					add_argument_to_command(t_command *cmd, char *arg);
+void					add_argument_to_command(t_command *cmd, char *arg,
+							int is_quoted);
 
 // ==================== [ Free ] ==================== //
 void					free_tokens(t_token *tokens);

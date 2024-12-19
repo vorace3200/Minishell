@@ -6,7 +6,7 @@
 /*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:27:04 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 11:17:45 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:56:08 by vorace32         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,36 @@ char	*remove_slash(const char *str)
 	result[j] = '\0';
 	return (result);
 }
-static void	print_arg(char **args, int i)
+
+static void	handle_special_char(char c, int have_quote)
+{
+	if (c == 'n')
+	{
+		if (have_quote)
+			write(1, "\\n", 2);
+		else
+			write(1, "n", 1);
+	}
+	else
+		write(1, &c, 1);
+}
+
+static void	print_arg(char **args, int i, int have_quote)
 {
 	int		j;
-	int		in_single;
-	int		in_double;
 	char	*arg;
 
 	while (args[i])
 	{
-		in_single = 0;
-		in_double = 0;
 		arg = args[i];
 		j = 0;
 		while (arg[j])
 		{
-			if (arg[j] == '\'' && !in_double)
-				in_single = !in_single;
-			else if (arg[j] == '\"' && !in_single)
-				in_double = !in_double;
-			else if (arg[j] == '\\' && !in_single && !in_double && arg[j + 1])
+			if (arg[j] == '\\' && arg[j + 1])
 			{
 				j++;
 				if (arg[j])
-					write(1, &arg[j], 1);
+					handle_special_char(arg[j], have_quote);
 			}
 			else
 				write(1, &arg[j], 1);
@@ -67,7 +73,7 @@ static void	print_arg(char **args, int i)
 	}
 }
 
-void	builtin_echo(t_shell *shell, char **args)
+void	builtin_echo(t_shell *shell, char **args, int have_quote)
 {
 	int	i;
 	int	newline;
@@ -79,8 +85,8 @@ void	builtin_echo(t_shell *shell, char **args)
 		newline = 0;
 		i = 2;
 	}
-	print_arg(args, i);
+	print_arg(args, i, have_quote);
 	if (newline)
-		printf("\n");
+		write(1, "\n", 1);
 	shell->exit_status = 0;
 }
