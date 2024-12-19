@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   clean_up.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
+/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 01:15:25 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/19 01:15:47 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:42:27 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Minishell.h"
+#include "../Minishell.h"
 
 void    cleanup_command(t_command *cmd)
 {

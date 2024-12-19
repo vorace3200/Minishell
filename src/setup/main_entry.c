@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_entry.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vorace32 <vorace32000@gmail.com>           +#+  +:+       +#+        */
+/*   By: tbrunier <tbrunier@student.42perpignan.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:53:50 by vorace32          #+#    #+#             */
-/*   Updated: 2024/12/18 22:59:03 by vorace32         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:29:05 by tbrunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	main_entry(t_shell *shell)
 	execute_commands(shell);
 	free_commands(shell->cmd_list);
 	shell->cmd_list = NULL;
+	cleanup_command_list(shell);
 }
